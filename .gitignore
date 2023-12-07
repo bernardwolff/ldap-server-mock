@@ -22,5 +22,6 @@ nbproject
 # Build files
 tsconfig.tsbuildinfo
 *.map
-*.js
 *.d.ts
+
+node_modules

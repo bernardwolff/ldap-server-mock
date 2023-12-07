@@ -43,15 +43,19 @@ export class LdapServerMock {
       });
 
       this._ldapServer.search(this._searchBase, (request: LdapSearchRequest, response: LdapSearchResponse, next: LdapNext) => {
-        // entire search callback function commented out
-        // this is to test what happens when the client never receives a response
-        /*for (const user of this._users) {
-          if (request.filter.matches(user.attributes)) {
-            response.send(user);
-          }
+        const self = this;
+        if (request.filter.json.type === 'And') {
+            // heartbeat
+            response.end();
+        } else {
+          // no response for other queries
+          // for (const user of self._users) {
+          //     if (request.filter.matches(user.attributes)) {
+          //         response.send(user);
+          //     }
+          // }
+          // response.end();
         }
-
-        response.end();*/
       });
 
       this._logger.info('starting');

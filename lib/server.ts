@@ -43,13 +43,15 @@ export class LdapServerMock {
       });
 
       this._ldapServer.search(this._searchBase, (request: LdapSearchRequest, response: LdapSearchResponse, next: LdapNext) => {
-        for (const user of this._users) {
+        // entire search callback function commented out
+        // this is to test what happens when the client never receives a response
+        /*for (const user of this._users) {
           if (request.filter.matches(user.attributes)) {
             response.send(user);
           }
         }
 
-        response.end();
+        response.end();*/
       });
 
       this._logger.info('starting');
